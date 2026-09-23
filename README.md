@@ -16,7 +16,7 @@ source install/setup.bash
 # 1. Launch the Manipulator in Rviz
 To start the manipulator simulation in Rviz run the command:
 ``` bash
-ros2 launch armando_description armando_display.launch.py
+ros2 launch arm_description armando_display.launch.py
 ```
 rviz will be started.
 
