@@ -33,13 +33,13 @@ ros2 run rqt_image_view rqt_image_view
 # 4. Controller
 There are two controllers available, position controller and trajectory controller. To active a controller you have to tun this command:
 ``` bash
-ros2 launch armando_gazebo armando_world.launch.py controller_type:=<type>
+ros2 launch armando_gazebo armando_world.launch.py controller_mode:=<type>
 ```
 where <type> can be position or trajectory, by defult is set to position.
 
 # 5. Subscriber and Publisher node
 To launch the subscriber and the publisher node you have to run:
 ``` bash
-ros2 run armando_controller arm_controller_node --ros-args -p controller_type:=<value>
+ros2 run armando_controller arm_controller_node --ros-args -p controller_mode:=<value>
 ```
 where <value> can be true for the position controller, or false for the trajectory controller.
