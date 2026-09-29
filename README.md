@@ -2,7 +2,7 @@
 Bring up your robot
 
 ## Available Packages in this Repository
-* `armando_description`
+* `arm_description`
 * `armando_gazebo`
 * `armando_controller`
   
