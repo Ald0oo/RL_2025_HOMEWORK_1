@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="armando_camera_macro" params="parent_link xyz rpy">
+    <!-- Giunto tra base_link e camera_link -->
+    <joint name="camera_joint" type="fixed">
+      <parent link="${parent_link}"/>
+      <child link="camera_link"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+    </joint>
+
+    <!-- Link della fotocamera -->
+    <link name="camera_link">
+      <visual>
+        <geometry>
+          <box size="0.05 0.05 0.05"/>
+        </geometry>
+        <material name="blue"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.05 0.05 0.05"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- Sensore Gazebo Sim (associato al link) -->
+    <gazebo reference="camera_link">
+      <sensor type="camera" name="camera_sensor">
+        <topic>camera/image</topic>
+        <update_rate>30</update_rate>
+        <camera>
+          <horizontal_fov>1.047</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.01</near>
+            <far>100</far>
+          </clip>
+        </camera>
+      </sensor>
+    </gazebo>
+
+    <!-- Plugin Gazebo Sim (associato al modello) -->
+    <gazebo>
+      <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+        <render_engine>ogre2</render_engine>
+      </plugin>
+    </gazebo>
+  </xacro:macro>
+
+</robot>

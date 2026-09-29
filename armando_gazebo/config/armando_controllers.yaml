@@ -1,0 +1,21 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100 # Frequenza di aggiornamento in Hz
+
+    # Broadcaster per leggere lo stato dei giunti
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # Controller di posizione
+    position_controller:
+      type: position_controllers/JointGroupPositionController
+
+# Configurazione specifica per il controller di posizione
+position_controller:
+  ros__parameters:
+    joints:
+      - j0
+      - j1
+      - j2
+      - j3
+    interface_name: position
