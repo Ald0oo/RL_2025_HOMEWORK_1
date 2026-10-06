@@ -1,45 +1,45 @@
-# RL_2025_HOMEWORK_1
-Bring up your robot
+#RL_2025_HOMEWORK_1
 
-## Available Packages in this Repository
-* `arm_description`
-* `armando_gazebo`
-* `armando_controller`
-  
-## Getting Started
-``` bash
-git clone https://github.com/Ald0oo/RL_2025_HOMEWORK_1.git
-colcon build 
-source install/setup.bash
-```
-## Usage
-# 1. Launch the Manipulator in Rviz
-To start the manipulator simulation in Rviz run the command:
-``` bash
-ros2 launch arm_description armando_display.launch.py
-```
-rviz will be started.
+- Prerequisites
+To compile and run the project, it is necessary to have the essential dependencies for ROS 2 and Gazebo installed. After logging into your container or virtual machine, be sure to install:
 
-# 2. Launch the Manipulator in Gazebo
-To start the manipulator simulation in Gazebo run the command:
-``` bash
-ros2 launch armando_gazebo armando_world.launch.py
-```
-# 3. Camera Sensor
-After launching the manipulator in Gazebo, open another terminal and run:
-``` bash
-ros2 run rqt_image_view rqt_image_view
-``` 
-# 4. Controller
-There are two controllers available, position controller and trajectory controller. To active a controller you have to tun this command:
-``` bash
-ros2 launch armando_gazebo armando_world.launch.py controller_mode:=<type>
-```
-where <type> can be position or trajectory, by defult is set to position.
+# Package update
+ sudo apt update
+# Optional GUI tools for debugging and visualization
+ sudo apt install ros-humble-joint-state-publisher-gui
+ sudo apt install ros-humble-rqt-image-view
+ - BUILD
+Cloning the Repository
 
-# 5. Subscriber and Publisher node
-To launch the subscriber and the publisher node you have to run:
-``` bash
-ros2 run armando_controller arm_controller_node --ros-args -p controller_mode:=<value>
-```
-where <value> can be true for the position controller, or false for the trajectory controller.
+Clone this repository into the desired folder :
+
+ git clone https://github.com/Ald0oo/RL_2025_HOMEWORK_1.git
+ colcon build
+ source install/setup.bash
+ - HOW TO LAUNCH
+Visualization Robot (Rviz2)
+
+To see only the kinematic model of the robot and its frames in RViz2:
+
+ ros2 launch arm_description armando_display.launch.py
+Complete Simulation (Gazebo) The main launchfile loads the robot in Gazebo and starts the controllers (ros2_control).
+
+Default Control Mode (Position): Starts the joint position controller.
+
+ ros2 launch armando_gazebo armando_world.launch.py
+Position Control Mode (Position): Starts the joint position controller.
+
+ ros2 launch armando_gazebo armando_world.launch.py controller_mode:=position.
+Trajectory Mode (requires external node): Starts the joint trajectory controller.
+
+ ros2 launch armando_gazebo armando_world.launch.py controller_mode:=trajectory
+ - INTERACTION AND CONTROL
+Manual Position Control (Test)
+
+To send a specific position setpoint to the joints (only in position mode), where the values are in the order [j0, j1, j2, j3] in radians: Open a new terminal and run the source command. Send the commands:
+
+# Zero Position (to stabilize the robot)
+ ros2 topic pub --rate 10 /arm_position_controller/commands std_msgs/msg/Float64MultiArray "{data: [0.0, 0.0, 0.0, 0.0]}"
+To visualize the real-time video feed from the simulated camera in Gazebo: Launch rqt_image_view (after running source in a new terminal) and select the /camera/image topic:
+
+ ros2 run rqt_image_view rqt_image_view
