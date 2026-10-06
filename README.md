@@ -2,6 +2,9 @@
 
 # Prerequisites
 To compile and run the project, it is necessary to have the essential dependencies for ROS 2 and Gazebo installed. After logging into your container or virtual machine, be sure to install:
+* `arm_description`
+* `armando_controller`
+* `armando_gazebo`
 
 # Package update
  ``` bash
