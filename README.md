@@ -31,10 +31,6 @@ To see only the kinematic model of the robot and its frames in RViz2:
 ``` 
 Complete Simulation (Gazebo) The main launchfile loads the robot in Gazebo and starts the controllers (ros2_control).
 
-Default Control Mode (Position): Starts the joint position controller.
-``` bash
- ros2 launch armando_gazebo armando_world.launch.py
-``` 
 Position Control Mode (Position): Starts the joint position controller.
 ``` bash
  ros2 launch armando_gazebo armando_world.launch.py controller_mode:=position.
